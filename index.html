@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Study With Fun - Dynamic Light Theme</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        /* Dynamic Color Shifting Background Animation */
+        @keyframes colorShift {
+            0% { background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%); }
+            33% { background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%); }
+            66% { background: linear-gradient(135deg, #fdfcfb 0%, #e2d1c3 100%); }
+            100% { background: linear-gradient(135deg, #f3e7e9 0%, #e3eeff 100%); }
+        }
+
+        body {
+            animation: colorShift 12s infinite alternate ease-in-out;
+            color: #1e293b;
+            padding-bottom: 100px;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Ultra Modern Glass Header */
+        header {
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            padding: 18px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .app-title {
+            font-size: 20px;
+            font-weight: 800;
+            background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: -0.5px;
+        }
+
+        /* Search Bar with Light Glow */
+        .search-container {
+            padding: 22px 24px 12px 24px;
+        }
+
+        .search-box {
+            width: 100%;
+            padding: 15px 20px 15px 48px;
+            border: 1px solid rgba(255, 255, 255, 0.8);
+            border-radius: 18px;
+            background: rgba(255, 255, 255, 0.85);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.08);
+            font-size: 14px;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            color: #1e293b;
+        }
+
+        .search-box:focus {
+            border-color: #6366f1;
+            box-shadow: 0 0 25px rgba(99, 102, 241, 0.2);
+            background: rgba(255, 255, 255, 1);
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 700;
+            margin: 24px 24px 16px 24px;
+            color: #334155;
+            letter-spacing: -0.3px;
+        }
+
+        /* Content Grid */
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 16px;
+            padding: 0 24px;
+        }
+
+        /* Premium Glass Card Styling with Ripple Support */
+        .card {
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border-radius: 22px;
+            padding: 18px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.04);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(99, 102, 241, 0.12);
+            border-color: rgba(99, 102, 241, 0.4);
+        }
+
+        /* Sponsored Ad Card Styling (Safe Light Theme) */
+        .card.sponsored-card {
+            background: rgba(255, 253, 245, 0.9);
+            border: 1.5px dashed #f59e0b;
+        }
+
+        .sponsored-badge {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(245, 158, 11, 0.15);
+            color: #d97706;
+            font-size: 9px;
+            font-weight: 800;
+            padding: 4px 8px;
+            border-radius: 6px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border: 1px solid rgba(245, 158, 11, 0.3);
+        }
+
+        .card img {
+            width: 105px;
+            height: 140px;
+            object-fit: cover;
+            border-radius: 14px;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .card-category {
+            font-size: 10px;
+            color: #64748b;
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 6px;
+            letter-spacing: 0.8px;
+        }
+
+        .card-title {
+            font-size: 13px;
+            font-weight: 700;
+            color: #0f172a;
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        /* Vibrant Install Button */
+        .install-btn {
+            background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+            color: white;
+            border: none;
+            padding: 9px 16px;
+            border-radius: 14px;
+            font-size: 12px;
+            font-weight: 700;
+            cursor: pointer;
+            margin-top: auto;
+            width: 100%;
+            box-shadow: 0 4px 15px rgba(245, 158, 11, 0.35);
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.2s;
+        }
+
+        .install-btn:active {
+            transform: scale(0.96);
+        }
+
+        .chapters-info {
+            font-size: 11px;
+            color: #94a3b8;
+            margin-top: auto;
+            font-weight: 600;
+        }
+
+        /* Ripple Effect CSS */
+        .ripple {
+            position: absolute;
+            background: rgba(99, 102, 241, 0.25);
+            border-radius: 50%;
+            transform: scale(0);
+            animation: ripple-effect 0.6s linear;
+            pointer-events: none;
+        }
+
+        @keyframes ripple-effect {
+            to {
+                transform: scale(4);
+                opacity: 0;
+            }
+        }
+
+        /* Footer Text */
+        .app-footer {
+            text-align: center;
+            margin-top: 45px;
+            padding: 20px;
+            font-size: 12px;
+            color: #475569;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        /* Floating Modern Bottom Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 16px;
+            left: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            border-radius: 22px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            z-index: 100;
+        }
+
+        .nav-item {
+            text-align: center;
+            font-size: 11px;
+            color: #64748b;
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.2s;
+        }
+
+        .nav-item.active {
+            color: #6366f1;
+            text-shadow: 0 0 10px rgba(99, 102, 241, 0.3);
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Header -->
+    <header>
+        <div class="app-title">
+            📚 Study With Fun
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-container">
+        <input type="text" class="search-box" placeholder="🔍 Search books, chapters or subjects...">
+    </div>
+
+    <div class="section-title">NCERT & Core Books</div>
+
+    <!-- Books & Native Ad Grid -->
+    <div class="content-grid">
+        
+        <!-- Real Book Card 1 -->
+        <div class="card" onclick="createRipple(event)">
+            <span class="card-category">English Medium</span>
+            <img src="https://via.placeholder.com/105x140/6366f1/ffffff?text=Accountancy" alt="Book Cover">
+            <div class="card-title">Accountancy Part I (Class XI)</div>
+            <div class="chapters-info">7 Chapters</div>
+        </div>
+
+        <!-- Safe Native Sponsored Ad Card -->
+        <div class="card sponsored-card" onclick="createRipple(event)">
+            <span class="sponsored-badge">Sponsored</span>
+            <img src="https://via.placeholder.com/105x140/f59e0b/ffffff?text=App+Ad" alt="Ad Banner">
+            <div class="card-title">Learn Coding Fast & Easily</div>
+            <button class="install-btn" onclick="event.stopPropagation(); createRipple(event)">Install Now</button>
+        </div>
+
+        <!-- Real Book Card 2 -->
+        <div class="card" onclick="createRipple(event)">
+            <span class="card-category">Hindi Medium</span>
+            <img src="https://via.placeholder.com/105x140/10b981/ffffff?text=Business" alt="Book Cover">
+            <div class="card-title">Business Studies (Class XI)</div>
+            <div class="chapters-info">8 Chapters</div>
+        </div>
+
+        <!-- Real Book Card 3 -->
+        <div class="card" onclick="createRipple(event)">
+            <span class="card-category">English Medium</span>
+            <img src="https://via.placeholder.com/105x140/3b82f6/ffffff?text=Economics" alt="Book Cover">
+            <div class="card-title">Micro Economics (Class XI)</div>
+            <div class="chapters-info">6 Chapters</div>
+        </div>
+
+    </div>
+
+    <!-- Footer Text -->
+    <div class="app-footer">
+        Made in ❤️ India • Crafted from ❤️ Lakhisarai
+    </div>
+
+    <!-- Bottom Navigation -->
+    <div class="bottom-nav">
+        <a href="#" class="nav-item active">🏠 Home</a>
+        <a href="#" class="nav-item">🎮 Game Zone</a>
+        <a href="#" class="nav-item">📖 My Books</a>
+    </div>
+
+    <!-- JavaScript for Ripple Effect -->
+    <script>
+        function createRipple(event) {
+            const button = event.currentTarget;
+            const circle = document.createElement("span");
+            const diameter = Math.max(button.clientWidth, button.clientHeight);
+            const radius = diameter / 2;
+
+            circle.style.width = circle.style.height = `${diameter}px`;
+            circle.style.left = `${event.clientX - button.getBoundingClientRect().left - radius}px`;
+            circle.style.top = `${event.clientY - button.getBoundingClientRect().top - radius}px`;
+            circle.classList.add("ripple");
+
+            const existingRipple = button.getElementsByClassName("ripple")[0];
+            if (existingRipple) {
+                existingRipple.remove();
+            }
+
+            button.appendChild(circle);
+        }
+    </script>
+
+</body>
+</html>
